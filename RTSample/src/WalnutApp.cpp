@@ -13,7 +13,7 @@ public:
 	virtual void OnUIRender() override
 	{
 		ImGui::Begin("Settings");
-		ImGui::Text("Last render: %.3fms", m_LastRenderTime);
+		ImGui::Text("Render Time: %.3fms", m_LastRenderTime);
 		if (ImGui::Button("Render"))
 		{
 			Render();
@@ -27,7 +27,7 @@ public:
 		m_ViewportHeight = ImGui::GetContentRegionAvail().y;
 
 		if (m_Image)
-			ImGui::Image(m_Image->GetDescriptorSet(), { (float)m_Image->GetWidth(), (float)m_Image->GetHeight() });
+			ImGui::Image(m_Image->GetDescriptorSet(), { static_cast<float>(m_Image->GetWidth()), static_cast<float>(m_Image->GetHeight()) });
 
 		ImGui::End();
 		ImGui::PopStyleVar();
@@ -72,15 +72,15 @@ Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 	Walnut::Application* app = new Walnut::Application(spec);
 	app->PushLayer<ExampleLayer>();
 	app->SetMenubarCallback([app]()
-	{
-		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("Exit"))
+			if (ImGui::BeginMenu("File"))
 			{
-				app->Close();
+				if (ImGui::MenuItem("Exit"))
+				{
+					app->Close();
+				}
+				ImGui::EndMenu();
 			}
-			ImGui::EndMenu();
-		}
-	});
+		});
 	return app;
 }
