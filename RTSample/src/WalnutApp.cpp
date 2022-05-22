@@ -6,7 +6,7 @@
 #include "Walnut/Timer.h"
 
 #include "Ray.h"
-#include "Util.h"
+#include "Utils.h"
 
 using namespace Walnut;
 
@@ -66,7 +66,7 @@ public:
 		        const float v = static_cast<float>(column) / static_cast<float>(m_ViewportHeight - 1);
 		        Ray r(origin, lowerLeftCorner + u * horizontal + v * vertical - origin);
 		        const glm::vec3 pixelColor = RayColor(r) * 255.f;
-		        uint32_t tp = rgb2hex(pixelColor);
+		        uint32_t tp = RGB2HEX(pixelColor);
 				m_ImageData[m_PixelIndex] = tp;
 				
 				m_PixelIndex++;
