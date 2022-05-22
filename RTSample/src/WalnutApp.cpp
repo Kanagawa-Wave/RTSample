@@ -13,18 +13,18 @@ public:
 	virtual void OnUIRender() override
 	{
 		ImGui::Begin("Settings");
-		ImGui::Text("Render Time: %.3fms", m_LastRenderTime);
+		ImGui::Text("Render Time: %.3fms", static_cast<double>(m_LastRenderTime));
 		if (ImGui::Button("Render"))
 		{
 			Render();
 		}
 		ImGui::End();
 
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, {0.0f, 0.0f});
 		ImGui::Begin("Viewport");
 
-		m_ViewportWidth = ImGui::GetContentRegionAvail().x;
-		m_ViewportHeight = ImGui::GetContentRegionAvail().y;
+		m_ViewportWidth = static_cast<uint32_t>(ImGui::GetContentRegionAvail().x);
+		m_ViewportHeight = static_cast<uint32_t>(ImGui::GetContentRegionAvail().y);
 
 		if (m_Image)
 			ImGui::Image(m_Image->GetDescriptorSet(), { static_cast<float>(m_Image->GetWidth()), static_cast<float>(m_Image->GetHeight()) });
