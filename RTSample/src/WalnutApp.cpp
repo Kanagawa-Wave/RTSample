@@ -19,6 +19,7 @@ public:
 		ImGui::Text("Last render: %.3fms", m_LastRenderTime);
 		ImGui::Text("Viewport: %d * %d", m_ViewportWidth, m_ViewportHeight);
 		ImGui::Text("Pixels rendered: %d", m_PixelIndex);
+		ImGui::Text("Pixel filling rate: %.3f pixel/ms", m_PixelIndex / m_LastRenderTime);
 		if (ImGui::Button("Render"))
 		{
 			Render();
@@ -30,7 +31,7 @@ public:
 
 		m_ViewportWidth = static_cast<uint32_t>(ImGui::GetContentRegionAvail().x);
 		m_ViewportHeight = static_cast<uint32_t>(ImGui::GetContentRegionAvail().y);
-		m_AspectRatio = (float)m_ViewportWidth / (float)m_ViewportHeight;
+		m_AspectRatio = static_cast<float>(m_ViewportWidth) / static_cast<float>(m_ViewportHeight);
 		m_CameraViewHeight = 2.f;
 		m_CameraViewWidth = m_AspectRatio * m_CameraViewHeight;
 
@@ -39,6 +40,8 @@ public:
 
 		ImGui::End();
 		ImGui::PopStyleVar();
+
+		Render();
 	}
 
 	void Render()
@@ -60,7 +63,7 @@ public:
 		m_PixelIndex = 0;
 		for (int column = m_ViewportHeight - 1; column >= 0; --column)
 	    {
-	        for (int row = 0; row < m_ViewportWidth; ++row)
+	        for (uint32_t row = 0; row < m_ViewportWidth; ++row)
 	        {
 		        const float u = static_cast<float>(row) / static_cast<float>(m_ViewportWidth - 1);
 		        const float v = static_cast<float>(column) / static_cast<float>(m_ViewportHeight - 1);
