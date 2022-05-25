@@ -4,6 +4,7 @@ project "RTSample"
    cppdialect "C++17"
    targetdir "bin/%{cfg.buildcfg}"
    staticruntime "off"
+   vectorextensions "AVX2"
 
    files { "src/**.h", "src/**.cpp" }
 

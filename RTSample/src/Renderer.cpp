@@ -1,7 +1,5 @@
 #include "Renderer.h"
 
-#include <glm/geometric.hpp>
-
 #include "Ray.h"
 #include "Utils.h"
 

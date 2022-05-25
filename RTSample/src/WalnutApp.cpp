@@ -11,7 +11,7 @@
 
 using namespace Walnut;
 
-class ExampleLayer : public Walnut::Layer
+class EditorLayer : public Walnut::Layer
 {
 public:
 	virtual void OnAttach() override
@@ -89,7 +89,7 @@ Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 	spec.Name = "Ray Tracing";
 
 	Walnut::Application* app = new Walnut::Application(spec);
-	app->PushLayer<ExampleLayer>();
+	app->PushLayer<EditorLayer>();
 	app->SetMenubarCallback([app]()
 	{
 		if (ImGui::BeginMenu("File"))

@@ -1,7 +1,12 @@
 #pragma once
 
 #include <cstdint>
+
+#define GLM_FORCE_AVX2
+#define GLM_FORCE_ALIGNED
+
 #include <glm/vec3.hpp>
+#include <glm/geometric.hpp>
 
 #include "Ray.h"
 
